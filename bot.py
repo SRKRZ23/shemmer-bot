@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 WEB_APP_URL = "https://shimmercad.netlify.app/"
 WEBHOOK_URL = os.getenv("WEBHOOK_URL")  # Например, https://shemmer-bot.onrender.com/webhook
+PORT = int(os.getenv("PORT", 80))  # Используем PORT из переменных окружения, по умолчанию 80
 
 # Проверка токена и URL
 if not TELEGRAM_TOKEN:
@@ -63,7 +64,7 @@ def main() -> None:
         # Настройка Webhook
         application.run_webhook(
             listen="0.0.0.0",
-            port=8443,
+            port=PORT,  # Используем порт из переменной окружения
             url_path="/webhook",
             webhook_url=WEBHOOK_URL
         )
