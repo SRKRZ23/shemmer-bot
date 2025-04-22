@@ -10,6 +10,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Токен бота
+import os
 TELEGRAM_TOKEN = "8080522396:AAF5GtOWuEOfP2_uFXTI-gw4Nz2FAIsHqdI"
 WEB_APP_URL = "https://shimmercad.netlify.app/"
 
@@ -34,4 +35,5 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
+
 
