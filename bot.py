@@ -1,6 +1,6 @@
 import logging
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Application, CommandHandler, CallbackContext
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
+from telegram.ext import Application, CommandHandler, ContextTypes
 
 # Настройка логирования
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
@@ -12,13 +12,13 @@ TOKEN = "7647048813:AAFyYk-d098YLrODIY0Wpr0sxVXmthScU9Q"
 # URL веб-приложения
 WEB_APP_URL = "https://shimmercad.netlify.app"
 
-async def start(update: Update, context: CallbackContext) -> None:
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Обработчик команды /start"""
     logger.info("Received /start command from user: %s", update.effective_user.id)
     
     # Создаём кнопку для открытия веб-приложения
     keyboard = [
-        [InlineKeyboardButton("Открыть приложение", web_app=WEB_APP_URL)]
+        [InlineKeyboardButton("Открыть приложение", web_app=WebAppInfo(url=WEB_APP_URL))]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
