@@ -1,76 +1,45 @@
 import logging
-import os
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
+from telegram.ext import Application, CommandHandler, CallbackContext
 
 # Настройка логирования
-logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
-)
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Токен бота и URL из переменных окружения
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
-WEB_APP_URL = "https://shimmercad.netlify.app/"
-WEBHOOK_URL = os.getenv("WEBHOOK_URL")  # Например, https://shemmer-bot.onrender.com/webhook
-PORT = int(os.getenv("PORT", 80))  # Используем PORT из переменных окружения, по умолчанию 80
+# Токен бота
+TOKEN = "7647048813:AAFyYk-d098YLrODIY0Wpr0sxVXmthScU9Q"
 
-# Проверка токена и URL
-if not TELEGRAM_TOKEN:
-    logger.error("TELEGRAM_TOKEN не найден в переменных окружения!")
-    raise ValueError("TELEGRAM_TOKEN не найден в переменных окружения!")
-if not WEBHOOK_URL:
-    logger.error("WEBHOOK_URL не найден в переменных окружения!")
-    raise ValueError("WEBHOOK_URL не найден в переменных окружения!")
+# URL веб-приложения
+WEB_APP_URL = "https://shimmercad.netlify.app"
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.info(f"Получена команда /start от пользователя {update.effective_user.id}")
-    try:
-        keyboard = [
-            [InlineKeyboardButton("Открыть Shemmer", web_app={"url": WEB_APP_URL})]
-        ]
-        reply_markup = InlineKeyboardMarkup(keyboard)
-        await update.message.reply_text(
-            "Добро пожаловать в Shemmer! Нажмите кнопку ниже, чтобы открыть приложение:",
-            reply_markup=reply_markup
-        )
-        logger.info("Сообщение с кнопкой успешно отправлено")
-    except Exception as e:
-        logger.error(f"Ошибка при отправке сообщения: {e}")
-        await update.message.reply_text("Произошла ошибка. Попробуйте позже.")
+async def start(update: Update, context: CallbackContext) -> None:
+    """Обработчик команды /start"""
+    logger.info("Received /start command from user: %s", update.effective_user.id)
+    
+    # Создаём кнопку для открытия веб-приложения
+    keyboard = [
+        [InlineKeyboardButton("Открыть приложение", web_app=WEB_APP_URL)]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
 
-async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.info(f"Получена команда /ping от пользователя {update.effective_user.id}")
-    await update.message.reply_text("Pong! Бот работает.")
-
-async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.info(f"Получено сообщение от пользователя {update.effective_user.id}: {update.message.text}")
-    await update.message.reply_text("Сообщение получено! Попробуйте отправить /start или /ping.")
-
-async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    query = update.callback_query
-    await query.answer()
-    logger.info(f"Пользователь {query.from_user.id} нажал кнопку")
+    # Отправляем сообщение с кнопкой
+    await update.message.reply_text(
+        "Добро пожаловать в Shemmer Bot! Нажмите кнопку ниже, чтобы открыть приложение.",
+        reply_markup=reply_markup
+    )
+    logger.info("Sent web app button with URL: %s", WEB_APP_URL)
 
 def main() -> None:
-    try:
-        application = Application.builder().token(TELEGRAM_TOKEN).build()
-        application.add_handler(CommandHandler("start", start))
-        application.add_handler(CommandHandler("ping", ping))
-        application.add_handler(CallbackQueryHandler(button))
-        application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-        logger.info("Бот запущен")
+    """Запуск бота"""
+    # Создаём приложение
+    application = Application.builder().token(TOKEN).build()
 
-        # Настройка Webhook
-        application.run_webhook(
-            listen="0.0.0.0",
-            port=PORT,  # Используем порт из переменной окружения
-            url_path="/webhook",
-            webhook_url=WEBHOOK_URL
-        )
-    except Exception as e:
-        logger.error(f"Ошибка при запуске бота: {e}")
-        raise
+    # Регистрируем обработчик команды /start
+    application.add_handler(CommandHandler("start", start))
+
+    # Запускаем бота
+    logger.info("Starting bot...")
+    application.run_polling(allowed_updates=Update.ALL_TYPES)
 
 if __name__ == '__main__':
     main()
