@@ -1,27 +1,160 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Shemmer Bot</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div style="text-align: center; margin-bottom: 20px;">
-        <label for="lang">Выберите язык: </label>
-        <select id="lang" onchange="updateLanguage()">
-            <option value="ru">Русский</option>
-            <option value="en">English</option>
-        </select>
+    <div class="welcome-overlay" id="welcomeOverlay" style="display: none;">
+        <h1 id="welcomeMessage">Добро пожаловать в Shemmer Bot!</h1>
+        <button onclick="closeWelcomeOverlay()">Продолжить</button>
     </div>
-    <h1 id="welcome">Добро пожаловать в Shemmer Bot</h1>
-    <h2 id="city">Город: Ташкент</h2>
-    <div class="filter">
-        <label for="category" id="filter-label">Фильтр по категории: </label>
-        <select id="category" onchange="filterPlaces()">
-            <option value="all">Все</option>
-        </select>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>Загрузка...</p>
     </div>
-    <ul id="places-list"></ul>
+    <header>
+        <div class="logo">
+            <img src="logo_shemmer.jpg" alt="Shemmer Bot Logo" id="logo">
+            <span class="app-name">Shemmer</span>
+        </div>
+    </header>
+    <main>
+        <!-- Главная страница -->
+        <section id="home-page" class="page">
+            <h1 id="welcome">Добро пожаловать в Shemmer Bot</h1>
+            <h2 id="city">Город: Ташкент</h2>
+            <div class="catalogue">
+                <h3 id="catalogue-title">Каталог мест</h3>
+                <ul id="catalogue-list"></ul>
+            </div>
+            <div class="deals">
+                <h3 id="deals-title">Специальные предложения</h3>
+                <div class="deal-item animate">
+                    <h4 id="deal1-title">Скидка 20% на массаж</h4>
+                    <p id="deal1-text">Только в этом месяце! Посетите любой спа-центр из нашего каталога.</p>
+                </div>
+                <div class="deal-item animate">
+                    <h4 id="deal2-title">Бесплатная йога-сессия</h4>
+                    <p id="deal2-text">Запишитесь на пробное занятие в любой студии йоги.</p>
+                </div>
+            </div>
+        </section>
 
+        <!-- Страница поиска -->
+        <section id="search-page" class="page" style="display: none;">
+            <h1 id="search-title">Поиск мест</h1>
+            <div class="controls">
+                <div class="filter">
+                    <select id="category" onchange="filterPlaces()">
+                        <option value="all">Все категории</option>
+                    </select>
+                </div>
+                <div class="service-filter">
+                    <select id="service" onchange="filterByService()">
+                        <option value="all">Все услуги</option>
+                    </select>
+                </div>
+                <div class="sort">
+                    <select id="sort" onchange="sortPlaces()">
+                        <option value="name">По имени</option>
+                        <option value="distance">По расстоянию</option>
+                    </select>
+                </div>
+                <div class="search">
+                    <input type="text" id="search" onkeyup="searchPlaces()" placeholder="Введите название места...">
+                </div>
+            </div>
+            <ul id="places-list"></ul>
+        </section>
+
+        <!-- Страница карты -->
+        <section id="map-page" class="page" style="display: none;">
+            <h1 id="map-title">Карта</h1>
+            <div id="map-error" style="display: none; color: red; text-align: center; margin-bottom: 10px;">Не удалось загрузить карту. Проверьте настройки API-ключа.</div>
+            <div id="map"></div>
+            <div id="map-controls">
+                <div class="route-options">
+                    <select id="travelMode" onchange="updateRoute()">
+                        <option value="DRIVING">Автомобиль</option>
+                        <option value="WALKING">Пешком</option>
+                        <option value="TRANSIT">Общественный транспорт</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Страница профиля -->
+        <section id="profile-page" class="page" style="display: none;">
+            <h1 id="profile-title">Профиль</h1>
+            <div class="profile-settings">
+                <h3 id="settings-title">Настройки</h3>
+                <div class="setting-item animate">
+                    <label for="lang" id="lang-label">Язык:</label>
+                    <select id="lang" onchange="updateLanguage()">
+                        <option value="ru">Русский</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <div class="setting-item animate">
+                    <label for="theme" id="theme-label">Тема:</label>
+                    <select id="theme" onchange="updateTheme()">
+                        <option value="light">Light Mode</option>
+                        <option value="dark">Dark Mode</option>
+                    </select>
+                </div>
+            </div>
+            <div class="profile-account">
+                <h3 id="account-title">Аккаунт</h3>
+                <div class="account-item animate">
+                    <button id="create-account-btn" onclick="alert('Функционал создания аккаунта в разработке')">Создать аккаунт</button>
+                </div>
+                <div class="account-item animate">
+                    <button id="login-btn" onclick="alert('Функционал входа в аккаунт в разработке')">Войти</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Модальное окно -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">×</span>
+                <h3 id="modal-title"></h3>
+                <p id="modal-hours"></p>
+                <p id="modal-services"></p>
+                <p id="modal-prices"></p>
+                <p id="modal-category"></p>
+                <p id="modal-distance"></p>
+                <button id="modal-route" onclick="showRoute()">Построить маршрут на карте</button>
+                <a id="modal-google-maps" href="#" target="_blank">Открыть в Google Maps</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <nav class="bottom-nav">
+            <div class="nav-item active" onclick="navigate('home')">
+                <i class="fas fa-home"></i>
+                <span id="home-nav">Главная</span>
+            </div>
+            <div class="nav-item" onclick="navigate('search')">
+                <i class="fas fa-search"></i>
+                <span id="search-nav">Поиск</span>
+            </div>
+            <div class="nav-item" onclick="navigate('map')">
+                <i class="fas fa-map"></i>
+                <span id="map-nav">Карта</span>
+            </div>
+            <div class="nav-item" onclick="navigate('profile')">
+                <i class="fas fa-user"></i>
+                <span id="profile-nav">Профиль</span>
+            </div>
+        </nav>
+    </footer>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AlzaSyD_NEW_KEY_6&libraries=marker&callback=initMap&loading=async" onerror="handleMapError()"></script>
     <script>
         const translations = {
             ru: {
@@ -31,9 +164,49 @@
                 prices: "Цены",
                 category: "Категория",
                 filterByCategory: "Фильтр по категории",
+                filterByService: "Фильтр по услугам",
                 all: "Все",
                 welcome: "Добро пожаловать в Shemmer Bot",
-                selectLanguage: "Выберите язык"
+                selectLanguage: "Выберите язык",
+                searchPlaceholder: "Введите название места...",
+                sortLabel: "Сортировать",
+                sortByName: "По имени",
+                sortByDistance: "По расстоянию",
+                distance: "Расстояние",
+                route: "Построить маршрут на карте",
+                googleMaps: "Открыть в Google Maps",
+                themeLabel: "Тема",
+                lightTheme: "Light Mode",
+                darkTheme: "Dark Mode",
+                travelMode: "Режим передвижения",
+                driving: "Автомобиль",
+                walking: "Пешком",
+                transit: "Общественный транспорт",
+                km: "км",
+                home: "Главная",
+                search: "Поиск",
+                map: "Карта",
+                profile: "Профиль",
+                searchTitle: "Поиск мест",
+                mapTitle: "Карта",
+                profileTitle: "Профиль",
+                settingsTitle: "Настройки",
+                accountTitle: "Аккаунт",
+                langLabel: "Язык:",
+                themeLabel: "Тема:",
+                createAccountBtn: "Создать аккаунт",
+                loginBtn: "Войти",
+                catalogueTitle: "Каталог мест",
+                dealsTitle: "Специальные предложения",
+                deal1Title: "Скидка 20% на массаж",
+                deal1Text: "Только в этом месяце! Посетите любой спа-центр из нашего каталога.",
+                deal2Title: "Бесплатная йога-сессия",
+                deal2Text: "Запишитесь на пробное занятие в любой студии йоги.",
+                serviceTypes: {
+                    yoga: "йога",
+                    spaProcedures: "спа-процедуры",
+                    massage: "массаж"
+                }
             },
             en: {
                 tashkent: "Tashkent",
@@ -42,56 +215,433 @@
                 prices: "Prices",
                 category: "Category",
                 filterByCategory: "Filter by Category",
+                filterByService: "Filter by Service",
                 all: "All",
                 welcome: "Welcome to Shemmer Bot",
-                selectLanguage: "Select Language"
+                selectLanguage: "Select Language",
+                searchPlaceholder: "Enter place name...",
+                sortLabel: "Sort",
+                sortByName: "By Name",
+                sortByDistance: "By Distance",
+                distance: "Distance",
+                route: "Build Route on Map",
+                googleMaps: "Open in Google Maps",
+                themeLabel: "Theme",
+                lightTheme: "Light Mode",
+                darkTheme: "Dark Mode",
+                travelMode: "Travel Mode",
+                driving: "Driving",
+                walking: "Walking",
+                transit: "Public Transit",
+                km: "km",
+                home: "Home",
+                search: "Search",
+                map: "Map",
+                profile: "Profile",
+                searchTitle: "Search Places",
+                mapTitle: "Map",
+                profileTitle: "Profile",
+                settingsTitle: "Settings",
+                accountTitle: "Account",
+                langLabel: "Language:",
+                themeLabel: "Theme:",
+                createAccountBtn: "Create Account",
+                loginBtn: "Login",
+                catalogueTitle: "Places Catalogue",
+                dealsTitle: "Special Offers",
+                deal1Title: "20% Discount on Massage",
+                deal1Text: "This month only! Visit any spa center from our catalogue.",
+                deal2Title: "Free Yoga Session",
+                deal2Text: "Sign up for a free trial session at any yoga studio.",
+                serviceTypes: {
+                    yoga: "yoga",
+                    spaProcedures: "spa procedures",
+                    massage: "massage"
+                }
             }
         };
 
         let currentLang = localStorage.getItem('lang') || 'ru';
-        const placesData = ${JSON.stringify(JSON.parse(fs.readFileSync('places.json', 'utf8')).tashkent)};
-        const categories = [...new Set(placesData.map(place => place.category))];
+        let currentTheme = localStorage.getItem('theme') || 'light';
+        let placesData;
+        let categories;
+        let services;
+        let map, markers = [], userLocation, directionsService, directionsRenderer, currentRoute;
+        let mapInitialized = false;
+
+        // Обработка ошибки загрузки Google Maps API
+        function handleMapError() {
+            console.error('Failed to load Google Maps API');
+            document.getElementById('loadingOverlay').style.display = 'none';
+            document.getElementById('map-error').style.display = 'block';
+        }
+
+        // Проверка, используется ли приложение через Telegram Mini-App
+        window.onload = function() {
+            if (window.Telegram && window.Telegram.WebApp) {
+                const user = window.Telegram.WebApp.initDataUnsafe.user;
+                const welcomeOverlay = document.getElementById('welcomeOverlay');
+                const welcomeMessage = document.getElementById('welcomeMessage');
+                welcomeMessage.innerText = translations[currentLang].welcome + (user ? `, ${user.first_name}!` : '!');
+                welcomeOverlay.style.display = 'flex';
+            }
+
+            fetch('places.json')
+                .then(response => response.json())
+                .then(data => {
+                    placesData = data.tashkent;
+                    categories = [...new Set(placesData.map(place => place.category))];
+                    services = [...new Set(placesData.flatMap(place => place.services))];
+                    renderCatalogue();
+                    renderPlaces();
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Error loading places.json:', error);
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                });
+        };
+
+        function closeWelcomeOverlay() {
+            document.getElementById('welcomeOverlay').style.display = 'none';
+        }
+
+        function navigate(section) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.style.display = 'none';
+                page.classList.remove('animate');
+            });
+
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            const targetPage = document.getElementById(`${section}-page`);
+            targetPage.style.display = 'block';
+            targetPage.classList.add('animate');
+
+            event.currentTarget.classList.add('active');
+
+            // Инициализировать карту только при переходе на страницу "Карта"
+            if (section === 'map' && !mapInitialized && placesData) {
+                initMap();
+            }
+        }
+
+        function initMap() {
+            if (mapInitialized) return;
+            if (!placesData) {
+                console.error('placesData is not loaded yet');
+                return;
+            }
+            mapInitialized = true;
+
+            document.getElementById('loadingOverlay').style.display = 'flex';
+            try {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: { lat: 41.2995, lng: 69.2401 },
+                    zoom: 12,
+                    mapId: '3e7fbf122a0ebe0a' // Используем созданный Map ID
+                });
+
+                directionsService = new google.maps.DirectionsService();
+                directionsRenderer = new google.maps.DirectionsRenderer();
+                directionsRenderer.setMap(map);
+
+                placesData.forEach((place, index) => {
+                    const marker = new google.maps.marker.AdvancedMarkerElement({
+                        position: { lat: place.lat, lng: place.lng },
+                        map: map,
+                        title: place.name
+                    });
+                    marker.addEventListener('gmp-click', () => {
+                        openModal(index);
+                        map.setCenter(marker.position);
+                        map.setZoom(15);
+                    });
+                    markers.push(marker);
+                });
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(position => {
+                        userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        calculateDistances();
+                        sortPlaces();
+                        document.getElementById('loadingOverlay').style.display = 'none';
+                    }, () => {
+                        console.log('Geolocation not available');
+                        document.getElementById('sort').options[1].disabled = true;
+                        document.getElementById('loadingOverlay').style.display = 'none';
+                    });
+                } else {
+                    document.getElementById('sort').options[1].disabled = true;
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error initializing map:', error);
+                document.getElementById('loadingOverlay').style.display = 'none';
+                document.getElementById('map-error').style.display = 'block';
+            }
+        }
+
+        function calculateDistances() {
+            if (!userLocation) return;
+            placesData.forEach(place => {
+                place.distance = getDistance(userLocation.lat, userLocation.lng, place.lat, place.lng);
+            });
+        }
+
+        function getDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        function updateCity() {
+            document.getElementById('city').innerText = translations[currentLang].tashkent;
+        }
 
         function updateLanguage() {
             currentLang = document.getElementById('lang').value;
             localStorage.setItem('lang', currentLang);
             document.getElementById('welcome').innerText = translations[currentLang].welcome;
+            document.getElementById('welcomeMessage').innerText = translations[currentLang].welcome;
             document.getElementById('city').innerText = translations[currentLang].tashkent;
-            document.getElementById('filter-label').innerText = translations[currentLang].filterByCategory + ': ';
+            document.getElementById('search-title').innerText = translations[currentLang].searchTitle;
+            document.getElementById('map-title').innerText = translations[currentLang].mapTitle;
+            document.getElementById('profile-title').innerText = translations[currentLang].profileTitle;
+            document.getElementById('settings-title').innerText = translations[currentLang].settingsTitle;
+            document.getElementById('account-title').innerText = translations[currentLang].accountTitle;
+            document.getElementById('lang-label').innerText = translations[currentLang].langLabel;
+            document.getElementById('theme-label').innerText = translations[currentLang].themeLabel;
+            document.getElementById('create-account-btn').innerText = translations[currentLang].createAccountBtn;
+            document.getElementById('login-btn').innerText = translations[currentLang].loginBtn;
+            document.getElementById('catalogue-title').innerText = translations[currentLang].catalogueTitle;
+            document.getElementById('deals-title').innerText = translations[currentLang].dealsTitle;
+            document.getElementById('deal1-title').innerText = translations[currentLang].deal1Title;
+            document.getElementById('deal1-text').innerText = translations[currentLang].deal1Text;
+            document.getElementById('deal2-title').innerText = translations[currentLang].deal2Title;
+            document.getElementById('deal2-text').innerText = translations[currentLang].deal2Text;
+            document.getElementById('search').placeholder = translations[currentLang].searchPlaceholder;
+            document.querySelector('.filter select').options[0].text = translations[currentLang].all;
+            document.querySelector('.service-filter select').options[0].text = translations[currentLang].all;
+            document.querySelector('.sort select option[value="name"]').text = translations[currentLang].sortByName;
+            document.querySelector('.sort select option[value="distance"]').text = translations[currentLang].sortByDistance;
+            document.querySelector('#profile-page select option[value="light"]').text = translations[currentLang].lightTheme;
+            document.querySelector('#profile-page select option[value="dark"]').text = translations[currentLang].darkTheme;
+            document.querySelector('.route-options select option[value="DRIVING"]').text = translations[currentLang].driving;
+            document.querySelector('.route-options select option[value="WALKING"]').text = translations[currentLang].walking;
+            document.querySelector('.route-options select option[value="TRANSIT"]').text = translations[currentLang].transit;
+            document.querySelector('.bottom-nav .nav-item:nth-child(1) span').text = translations[currentLang].home;
+            document.querySelector('.bottom-nav .nav-item:nth-child(2) span').text = translations[currentLang].search;
+            document.querySelector('.bottom-nav .nav-item:nth-child(3) span').text = translations[currentLang].map;
+            document.querySelector('.bottom-nav .nav-item:nth-child(4) span').text = translations[currentLang].profile;
             const categorySelect = document.getElementById('category');
             categorySelect.innerHTML = '<option value="all">' + translations[currentLang].all + '</option>' +
                 categories.map(category => `<option value="${category}">${category}</option>`).join('');
+            const serviceSelect = document.getElementById('service');
+            serviceSelect.innerHTML = '<option value="all">' + translations[currentLang].all + '</option>' +
+                services.map(service => `<option value="${service}">${translations[currentLang].serviceTypes[service] || service}</option>`).join('');
             renderPlaces();
+            renderCatalogue();
+        }
+
+        function updateTheme() {
+            currentTheme = document.getElementById('theme').value;
+            localStorage.setItem('theme', currentTheme);
+            document.body.className = currentTheme;
+            document.querySelector('.modal-content').className = 'modal-content ' + currentTheme;
+            const elements = document.querySelectorAll('#places-list li, #catalogue-list li, .deal-item, .setting-item, .account-item, .modal-content');
+            elements.forEach(el => {
+                el.classList.remove('animate');
+                void el.offsetWidth;
+                el.classList.add('animate');
+            });
+        }
+
+        function renderCatalogue() {
+            if (!placesData) {
+                console.error('placesData is not loaded yet');
+                return;
+            }
+            const catalogueList = document.getElementById('catalogue-list');
+            catalogueList.innerHTML = placesData.slice(0, 5).map((place, index) => `
+                <li class="animate">
+                    <div class="place-name" onclick="openModal(${index})">
+                        <i class="fas fa-map-marker-alt"></i> ${place.name}
+                    </div>
+                    <p class="category-text">${translations[currentLang].category}: ${place.category}</p>
+                    <p class="services-text">${translations[currentLang].services}: ${place.services.map(service => translations[currentLang].serviceTypes[service] || service).join(', ')}</p>
+                </li>
+            `).join('');
         }
 
         function renderPlaces() {
+            if (!placesData) {
+                console.error('placesData is not loaded yet');
+                return;
+            }
             const placesList = document.getElementById('places-list');
             placesList.innerHTML = placesData.map((place, index) => `
-                <li data-category="${place.category}" data-index="${index}">
-                    <div class="place-name">${place.name}</div>
-                    ${translations[currentLang].hours}: ${place.hours}<br>
-                    ${translations[currentLang].services}: ${place.services.join(', ')}<br>
-                    ${translations[currentLang].prices}: ${place.prices.join(', ')}<br>
-                    ${translations[currentLang].category}: ${place.category}
+                <li class="animate" data-category="${place.category}" data-index="${index}" data-services="${place.services.join(',')}">
+                    <div class="place-name" onclick="openModal(${index})">
+                        <i class="fas fa-map-marker-alt"></i> ${place.name}
+                    </div>
+                    <p>${translations[currentLang].hours}: ${place.hours}</p>
+                    <p>${translations[currentLang].services}: ${place.services.map(service => translations[currentLang].serviceTypes[service] || service).join(', ')}</p>
+                    <p>${translations[currentLang].prices}: ${place.prices.join(', ')}</p>
+                    <p>${translations[currentLang].category}: ${place.category}</p>
+                    <p>${place.distance ? `${translations[currentLang].distance}: ${place.distance.toFixed(2)} ${translations[currentLang].km}` : ''}</p>
                 </li>
             `).join('');
             filterPlaces();
+            filterByService();
+            searchPlaces();
+        }
+
+        function openModal(index) {
+            const place = placesData[index];
+            document.getElementById('modal-title').innerText = place.name;
+            document.getElementById('modal-hours').innerText = `${translations[currentLang].hours}: ${place.hours}`;
+            document.getElementById('modal-services').innerText = `${translations[currentLang].services}: ${place.services.map(service => translations[currentLang].serviceTypes[service] || service).join(', ')}`;
+            document.getElementById('modal-prices').innerText = `${translations[currentLang].prices}: ${place.prices.join(', ')}`;
+            document.getElementById('modal-category').innerText = `${translations[currentLang].category}: ${place.category}`;
+            document.getElementById('modal-distance').innerText = place.distance ? `${translations[currentLang].distance}: ${place.distance.toFixed(2)} ${translations[currentLang].km}` : '';
+            document.getElementById('modal-route').innerText = translations[currentLang].route;
+            document.getElementById('modal-google-maps').innerText = translations[currentLang].googleMaps;
+            document.getElementById('modal-google-maps').href = `https://www.google.com/maps/dir/?api=1&destination=${place.lat},${place.lng}`;
+            document.getElementById('modal').style.display = 'block';
+            navigate('map');
+            if (map) {
+                map.setCenter({ lat: place.lat, lng: place.lng });
+                map.setZoom(15);
+            }
+            currentRoute = { lat: place.lat, lng: place.lng };
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            if (directionsRenderer) {
+                directionsRenderer.setDirections({ routes: [] });
+            }
+            currentRoute = null;
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+                if (directionsRenderer) {
+                    directionsRenderer.setDirections({ routes: [] });
+                }
+                currentRoute = null;
+            }
+        }
+
+        function showRoute(destLat, destLng) {
+            if (!userLocation) {
+                alert('Пожалуйста, разрешите доступ к геолокации для построения маршрута.');
+                return;
+            }
+            const travelMode = document.getElementById('travelMode').value;
+            const request = {
+                origin: new google.maps.LatLng(userLocation.lat, userLocation.lng),
+                destination: new google.maps.LatLng(destLat, destLng),
+                travelMode: travelMode
+            };
+            directionsService.route(request, (result, status) => {
+                if (status === 'OK') {
+                    directionsRenderer.setDirections(result);
+                } else {
+                    alert('Не удалось построить маршрут: ' + status);
+                }
+            });
+        }
+
+        function updateRoute() {
+            if (currentRoute) {
+                showRoute(currentRoute.lat, currentRoute.lng);
+            }
         }
 
         function filterPlaces() {
             const category = document.getElementById('category').value;
             const places = document.querySelectorAll('#places-list li');
             places.forEach(place => {
-                if (category === 'all' || place.getAttribute('data-category') === category) {
+                const placeCategory = place.getAttribute('data-category');
+                if (category === 'all' || placeCategory === category) {
                     place.style.display = 'block';
                 } else {
                     place.style.display = 'none';
                 }
             });
+            updateMarkers();
+        }
+
+        function filterByService() {
+            const service = document.getElementById('service').value;
+            const places = document.querySelectorAll('#places-list li');
+            places.forEach(place => {
+                const placeServices = place.getAttribute('data-services').split(',');
+                if (service === 'all' || placeServices.includes(service)) {
+                    place.style.display = 'block';
+                } else {
+                    place.style.display = 'none';
+                }
+            });
+            updateMarkers();
+        }
+
+        function searchPlaces() {
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            const places = document.querySelectorAll('#places-list li');
+            places.forEach(place => {
+                const placeName = place.querySelector('.place-name').innerText.toLowerCase();
+                if (placeName.includes(searchTerm)) {
+                    place.style.display = 'block';
+                } else {
+                    place.style.display = 'none';
+                }
+            });
+            updateMarkers();
+        }
+
+        function sortPlaces() {
+            const sortBy = document.getElementById('sort').value;
+            if (sortBy === 'name') {
+                placesData.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (sortBy === 'distance' && userLocation) {
+                placesData.sort((a, b) => a.distance - b.distance);
+            }
+            renderPlaces();
+        }
+
+        function updateMarkers() {
+            if (!markers || markers.length === 0 || !placesData) return;
+            const category = document.getElementById('category').value;
+            const service = document.getElementById('service').value;
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            markers.forEach((marker, index) => {
+                const place = placesData[index];
+                const matchesCategory = category === 'all' || place.category === category;
+                const matchesService = service === 'all' || place.services.includes(service);
+                const matchesSearch = place.name.toLowerCase().includes(searchTerm);
+                marker.map = (matchesCategory && matchesService && matchesSearch) ? map : null;
+            });
         }
 
         document.getElementById('lang').value = currentLang;
+        document.getElementById('theme').value = currentTheme;
         updateLanguage();
+        updateTheme();
     </script>
 </body>
 </html>

@@ -1,45 +1,616 @@
+/* Базовые стили для мобильного приложения */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
-    padding: 20px;
-    background-color: #f4f4f9;
-    color: #333;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
 }
-h1, h2 {
-    text-align: center;
-    color: #2c3e50;
+
+/* Light Mode стиль */
+body.light {
+    background-color: #FEEFF3;
+    color: #4A4A4A;
 }
-.filter {
+
+/* Dark Mode стиль */
+body.dark {
+    background-color: #1A2A44;
+    color: #FFFFFF;
+}
+
+/* Приветственная страница */
+.welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.welcome-overlay h1 {
+    color: #FFFFFF;
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
     text-align: center;
     margin-bottom: 20px;
 }
-.filter select {
-    padding: 8px;
+
+.welcome-overlay button {
+    padding: 10px 20px;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    background-color: #F06292;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
+
+body.dark .welcome-overlay button {
+    background-color: #00C4B4;
+}
+
+.welcome-overlay button:hover {
+    background-color: #EC407A;
+}
+
+body.dark .welcome-overlay button:hover {
+    background-color: #00A69B;
+}
+
+/* Стили для шапки */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #F8C1CC;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 900;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+body.dark header {
+    background-color: #00C4B4;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.logo .app-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+/* Основной контент */
+main {
+    flex: 1;
+    padding: 20px;
+    margin-top: 80px;
+}
+
+/* Стили для страниц */
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+h1, h2, h3, h4 {
+    text-align: center;
+    margin: 10px 0;
+}
+
+body.light h1, body.light h2, body.light h3, body.light h4 {
+    color: #F06292;
+}
+
+body.dark h1, body.dark h2, body.dark h3, body.dark h4 {
+    color: #00C4B4;
+}
+
+/* Каталог и предложения на главной странице */
+.catalogue, .deals {
+    margin-bottom: 20px;
+}
+
+.catalogue h3, .deals h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+}
+
+.deal-item {
+    background-color: #FFFFFF;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+body.light .deal-item {
+    background-color: #FFF5F7;
+}
+
+body.dark .deal-item {
+    background-color: #2B3E5B;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.deal-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+}
+
+.deal-item p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+
+.catalogue-list .place-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+}
+
+.category-text, .services-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+
+/* Элементы управления на странице поиска */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.filter, .service-filter, .sort, .search {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.controls select, .controls input {
+    padding: 12px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+}
+
+body.light .controls select, body.light .controls input {
+    border-color: #F8C1CC;
+    background-color: #FFFFFF;
+    color: #4A4A4A;
+}
+
+body.dark .controls select, body.dark .controls input {
+    border-color: #00C4B4;
+    background-color: #2B3E5B;
+    color: #FFFFFF;
+}
+
+.controls select:hover, .controls input:hover {
+    border-color: #F06292;
+}
+
+body.dark .controls select:hover, body.dark .controls input:hover {
+    border-color: #00C4B4;
+}
+
+/* Карта */
+#map {
+    height: 400px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+#map-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.route-options {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.route-options select {
+    padding: 8px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid #F8C1CC;
+    background-color: #FFFFFF;
+    color: #4A4A4A;
+}
+
+body.dark .route-options select {
+    border-color: #00C4B4;
+    background-color: #2B3E5B;
+    color: #FFFFFF;
+}
+
+/* Список мест */
 ul {
     list-style-type: none;
     padding: 0;
-    max-width: 800px;
-    margin: 0 auto;
+    margin: 0;
 }
+
 li {
-    background-color: #fff;
+    background-color: #FFFFFF;
     padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 8px;
+    margin-bottom: 15px;
+    border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
+
+body.light li {
+    background-color: #FFF5F7;
+}
+
+body.dark li {
+    background-color: #2B3E5B;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
 li:hover {
     transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 .place-name {
-    font-size: 18px;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #F06292;
+    cursor: pointer;
+}
+
+body.dark .place-name {
+    color: #00C4B4;
+}
+
+.place-name i {
+    margin-right: 5px;
+}
+
+/* Модальное окно */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #FFF5F7;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #F8C1CC;
+    width: 90%;
+    max-width: 380px;
+    border-radius: 10px;
+}
+
+body.dark .modal-content {
+    background-color: #2B3E5B;
+    border-color: #00C4B4;
+    color: #FFFFFF;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 24px;
     font-weight: bold;
-    color: #2980b9;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #F06292;
+}
+
+body.dark .close {
+    color: #ccc;
+}
+
+body.dark .close:hover,
+body.dark .close:focus {
+    color: #00C4B4;
+}
+
+#modal-route, #modal-google-maps {
+    display: block;
+    margin: 10px 0;
+    padding: 10px 15px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #F06292;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+body.dark #modal-route, body.dark #modal-google-maps {
+    background-color: #00C4B4;
+}
+
+#modal-route:hover, #modal-google-maps:hover {
+    background-color: #EC407A;
+    transform: scale(1.05);
+}
+
+body.dark #modal-route:hover, body.dark #modal-google-maps:hover {
+    background-color: #00A69B;
+}
+
+#modal-route i, #modal-google-maps i {
+    margin-right: 5px;
+}
+
+/* Стили для страницы профиля */
+.profile-settings, .profile-account {
+    margin-bottom: 20px;
+}
+
+.setting-item, .account-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+}
+
+body.light .setting-item, body.light .account-item {
+    background-color: #FFF5F7;
+}
+
+body.dark .setting-item, body.dark .account-item {
+    background-color: #2B3E5B;
+}
+
+.setting-item label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+
+.setting-item select, .account-item button {
+    padding: 8px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid #F8C1CC;
+    background-color: #FFFFFF;
+    color: #4A4A4A;
+    cursor: pointer;
+}
+
+body.dark .setting-item select, body.dark .account-item button {
+    border-color: #00C4B4;
+    background-color: #2B3E5B;
+    color: #FFFFFF;
+}
+
+/* Нижняя навигация */
+footer {
+    position: sticky;
+    bottom: 0;
+    background-color: #F8C1CC;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 900;
+}
+
+body.dark footer {
+    background-color: #00C4B4;
+}
+
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.nav-item.active {
+    font-weight: bold;
+}
+
+.nav-item i {
+    font-size: 20px;
+}
+
+.nav-item span {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pageFade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+body.light .animate, body.light .page.animate {
+    animation: fadeIn 0.5s ease-in;
+}
+
+body.dark .animate, body.dark .page.animate {
+    animation: slideIn 0.5s ease-in;
+}
+
+/* Загрузка */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #F06292;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+body.dark .spinner {
+    border-top-color: #00C4B4;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-overlay p {
+    color: #fff;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Адаптивность */
+@media (max-width: 420px) {
+    body {
+        padding: 10px;
+    }
+
+    h1, h2 {
+        font-size: 1.2em;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .logo img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .controls select, .controls input {
+        font-size: 12px;
+    }
+
+    li {
+        padding: 10px;
+    }
+
+    .place-name {
+        font-size: 14px;
+    }
+
+    #map {
+        height: 300px;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 15% auto;
+    }
 }
 
