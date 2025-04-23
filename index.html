@@ -1,94 +1,98 @@
 <!DOCTYPE html>
-     <html lang="ru">
-     <head>
-         <meta charset="UTF-8">
-         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <meta name="theme-color" content="#121212">
-         <title>Shemmer - Matnar Group</title>
-         <link rel="stylesheet" href="styles.css">
-         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@700&family=Poppins:wght@400&display=swap" rel="stylesheet">
-         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-         <link rel="manifest" href="/manifest.json">
-     </head>
-     <body>
-         <!-- Логотип -->
-         <div class="logo">
-             <img src="https://ibb.co/cKSvwRrr" alt="Shemmer Logo">
-         </div>
+<html>
+<head>
+    <title>Shemmer Bot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <label for="lang">Выберите язык: </label>
+        <select id="lang" onchange="updateLanguage()">
+            <option value="ru">Русский</option>
+            <option value="en">English</option>
+        </select>
+    </div>
+    <h1 id="welcome">Добро пожаловать в Shemmer Bot</h1>
+    <h2 id="city">Город: Ташкент</h2>
+    <div class="filter">
+        <label for="category" id="filter-label">Фильтр по категории: </label>
+        <select id="category" onchange="filterPlaces()">
+            <option value="all">Все</option>
+        </select>
+    </div>
+    <ul id="places-list"></ul>
 
-         <!-- Открывающая сцена -->
-         <div id="splash-screen">
-             <div class="splash-content">
-                 <h1 class="fade-in matnar-group">Matnar Group</h1>
-                 <p class="fade-in-delayed powered-by">Powered by 4ay.uz</p>
-                 <div class="spinner"></div>
-             </div>
-         </div>
+    <script>
+        const translations = {
+            ru: {
+                tashkent: "Ташкент",
+                hours: "Часы работы",
+                services: "Услуги",
+                prices: "Цены",
+                category: "Категория",
+                filterByCategory: "Фильтр по категории",
+                all: "Все",
+                welcome: "Добро пожаловать в Shemmer Bot",
+                selectLanguage: "Выберите язык"
+            },
+            en: {
+                tashkent: "Tashkent",
+                hours: "Hours",
+                services: "Services",
+                prices: "Prices",
+                category: "Category",
+                filterByCategory: "Filter by Category",
+                all: "All",
+                welcome: "Welcome to Shemmer Bot",
+                selectLanguage: "Select Language"
+            }
+        };
 
-         <!-- Основной интерфейс -->
-         <div id="app-container" class="hidden">
-             <!-- Шапка -->
-             <header>
-                 <div class="header-content">
-                     <h1>Shemmer</h1>
-                     <div class="profile-icon material-icons">person</div>
-                 </div>
-             </header>
+        let currentLang = localStorage.getItem('lang') || 'ru';
+        const placesData = ${JSON.stringify(JSON.parse(fs.readFileSync('places.json', 'utf8')).tashkent)};
+        const categories = [...new Set(placesData.map(place => place.category))];
 
-             <!-- Карта -->
-             <div id="map-container">
-                 <div id="map"></div>
-             </div>
+        function updateLanguage() {
+            currentLang = document.getElementById('lang').value;
+            localStorage.setItem('lang', currentLang);
+            document.getElementById('welcome').innerText = translations[currentLang].welcome;
+            document.getElementById('city').innerText = translations[currentLang].tashkent;
+            document.getElementById('filter-label').innerText = translations[currentLang].filterByCategory + ': ';
+            const categorySelect = document.getElementById('category');
+            categorySelect.innerHTML = '<option value="all">' + translations[currentLang].all + '</option>' +
+                categories.map(category => `<option value="${category}">${category}</option>`).join('');
+            renderPlaces();
+        }
 
-             <!-- Секция услуг -->
-             <section id="services">
-                 <h2>Выберите услугу</h2>
-                 <div class="service-cards">
-                     <div class="card slide-in">
-                         <img src="https://via.placeholder.com/150?text=Cleaning" alt="Cleaning">
-                         <h3>Уборка</h3>
-                         <p>Профессиональная уборка дома</p>
-                         <button class="book-now">Заказать</button>
-                     </div>
-                     <div class="card slide-in">
-                         <img src="https://via.placeholder.com/150?text=Repair" alt="Repair">
-                         <h3>Ремонт</h3>
-                         <p>Ремонт техники и мебели</p>
-                         <button class="book-now">Заказать</button>
-                     </div>
-                     <div class="card slide-in">
-                         <img src="https://via.placeholder.com/150?text=Spa" alt="Spa">
-                         <h3>Спа</h3>
-                         <p>Расслабляющие процедуры</p>
-                         <button class="book-now">Заказать</button>
-                     </div>
-                 </div>
-             </section>
+        function renderPlaces() {
+            const placesList = document.getElementById('places-list');
+            placesList.innerHTML = placesData.map((place, index) => `
+                <li data-category="${place.category}" data-index="${index}">
+                    <div class="place-name">${place.name}</div>
+                    ${translations[currentLang].hours}: ${place.hours}<br>
+                    ${translations[currentLang].services}: ${place.services.join(', ')}<br>
+                    ${translations[currentLang].prices}: ${place.prices.join(', ')}<br>
+                    ${translations[currentLang].category}: ${place.category}
+                </li>
+            `).join('');
+            filterPlaces();
+        }
 
-             <!-- Навигационная панель -->
-             <nav class="bottom-nav">
-                 <div class="nav-item active" data-page="home">
-                     <span class="material-icons">home</span>
-                     <p>Главная</p>
-                 </div>
-                 <div class="nav-item" data-page="search">
-                     <span class="material-icons">search</span>
-                     <p>Поиск</p>
-                 </div>
-                 <div class="nav-item" data-page="map">
-                     <span class="material-icons">map</span>
-                     <p>Карта</p>
-                 </div>
-                 <div class="nav-item" data-page="profile">
-                     <span class="material-icons">person</span>
-                     <p>Профиль</p>
-                 </div>
-             </nav>
-         </div>
+        function filterPlaces() {
+            const category = document.getElementById('category').value;
+            const places = document.querySelectorAll('#places-list li');
+            places.forEach(place => {
+                if (category === 'all' || place.getAttribute('data-category') === category) {
+                    place.style.display = 'block';
+                } else {
+                    place.style.display = 'none';
+                }
+            });
+        }
 
-         <!-- Подключение Google Maps API -->
-         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdeWq_DkpfTUblxWJE5snVxGclsnmS-kg&callback=initMap" async defer></script>
-         <script src="script.js"></script>
-     </body>
-     </html>
+        document.getElementById('lang').value = currentLang;
+        updateLanguage();
+    </script>
+</body>
+</html>
 

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+     <html lang="ru">
+     <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <meta name="theme-color" content="#FFF5F7">
+         <title>Shemmer - Каталог</title>
+         <link rel="stylesheet" href="styles.css">
+         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+         <link rel="manifest" href="/manifest.json">
+     </head>
+     <body>
+         <!-- Логотип -->
+         <div class="logo" role="img" aria-label="Логотип Shemmer">
+             <img src="logo shemmer.jpg" alt="Shemmer Logo">
+         </div>
+
+         <!-- Основной интерфейс -->
+         <div id="app-container">
+             <!-- Шапка -->
+             <header>
+                 <div class="header-content">
+                     <h1>Каталог услуг</h1>
+                     <div class="profile-icon material-icons" role="button" aria-label="Перейти в профиль">person</div>
+                 </div>
+             </header>
+
+             <!-- Каталог -->
+             <section id="services">
+                 <h2 data-translate="serviceCategories">Все услуги</h2>
+                 <div class="service-grid" id="service-grid">
+                     <!-- Услуги будут добавлены через JavaScript -->
+                 </div>
+             </section>
+
+             <!-- Навигационная панель -->
+             <nav class="bottom-nav" role="navigation" aria-label="Основная навигация">
+                 <div class="nav-item" data-page="home" role="button" aria-label="Главная страница">
+                     <span class="material-icons">home</span>
+                     <p data-translate="home">Главная</p>
+                 </div>
+                 <div class="nav-item" data-page="search" role="button" aria-label="Страница поиска">
+                     <span class="material-icons">search</span>
+                     <p data-translate="search">Поиск</p>
+                 </div>
+                 <div class="nav-item" data-page="map" role="button" aria-label="Страница карты">
+                     <span class="material-icons">map</span>
+                     <p data-translate="map">Карта</p>
+                 </div>
+                 <div class="nav-item active" data-page="profile" role="button" aria-label="Страница профиля">
+                     <span class="material-icons">person</span>
+                     <p data-translate="profile">Профиль</p>
+                 </div>
+             </nav>
+         </div>
+
+         <script src="translations.js"></script>
+         <script src="script.js"></script>
+     </body>
+     </html>
+

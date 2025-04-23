@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+     <html lang="ru">
+     <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <meta name="theme-color" content="#FFF5F7">
+         <title data-translate="map">Shemmer - Карта</title>
+         <link rel="stylesheet" href="styles.css">
+         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+         <link rel="manifest" href="/manifest.json">
+     </head>
+     <body>
+         <!-- Логотип -->
+         <div class="logo" role="img" aria-label="Логотип Shemmer">
+             <img src="logo shemmer.jpg" alt="Shemmer Logo">
+         </div>
+
+         <!-- Основной интерфейс -->
+         <div id="app-container">
+             <!-- Шапка -->
+             <header>
+                 <div class="header-content">
+                     <h1 data-translate="map">Карта</h1>
+                     <div class="profile-icon material-icons" role="button" aria-label="Перейти в профиль">person</div>
+                 </div>
+             </header>
+
+             <!-- Карта -->
+             <div id="map-container">
+                 <div id="city-selector">
+                     <select id="city-select" aria-label="Выберите город">
+                         <option value="tashkent" data-translate="tashkent">Ташкент</option>
+                         <option value="khiva" data-translate="khiva">Хива</option>
+                     </select>
+                     <select id="service-filter" aria-label="Фильтр по услугам">
+                         <option value="" data-translate="allServices">Все услуги</option>
+                         <option value="spaProcedures" data-translate="spaProcedures">Спа-процедуры</option>
+                         <option value="massage" data-translate="massage">Массаж</option>
+                         <option value="manicure" data-translate="manicure">Маникюр</option>
+                         <option value="pedicure" data-translate="pedicure">Педикюр</option>
+                         <option value="hairColoring" data-translate="hairColoring">Окрашивание волос</option>
+                         <option value="makeup" data-translate="makeup">Макияж</option>
+                         <option value="sauna" data-translate="sauna">Сауна</option>
+                         <option value="yoga" data-translate="yoga">Йога</option>
+                     </select>
+                 </div>
+                 <div id="map" role="region" aria-label="Карта с местами"></div>
+             </div>
+
+             <!-- Навигационная панель -->
+             <nav class="bottom-nav" role="navigation" aria-label="Основная навигация">
+                 <div class="nav-item" data-page="home" role="button" aria-label="Главная страница">
+                     <span class="material-icons">home</span>
+                     <p data-translate="home">Главная</p>
+                 </div>
+                 <div class="nav-item" data-page="search" role="button" aria-label="Страница поиска">
+                     <span class="material-icons">search</span>
+                     <p data-translate="search">Поиск</p>
+                 </div>
+                 <div class="nav-item active" data-page="map" role="button" aria-label="Страница карты">
+                     <span class="material-icons">map</span>
+                     <p data-translate="map">Карта</p>
+                 </div>
+                 <div class="nav-item" data-page="profile" role="button" aria-label="Страница профиля">
+                     <span class="material-icons">person</span>
+                     <p data-translate="profile">Профиль</p>
+                 </div>
+             </nav>
+         </div>
+
+         <!-- Подключение Google Maps API -->
+         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdeWq_DkpfTUblxWJE5snVxGclsnmS-kg&callback=initMap&libraries=geometry" async defer></script>
+         <script src="translations.js"></script>
+         <script src="script.js"></script>
+     </body>
+     </html>
+

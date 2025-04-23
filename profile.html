@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+     <html lang="ru">
+     <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <meta name="theme-color" content="#FFF5F7">
+         <title data-translate="profile">Shemmer - Профиль</title>
+         <link rel="stylesheet" href="styles.css">
+         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+         <link rel="manifest" href="/manifest.json">
+     </head>
+     <body>
+         <!-- Логотип -->
+         <div class="logo" role="img" aria-label="Логотип Shemmer">
+             <img src="logo shemmer.jpg" alt="Shemmer Logo">
+         </div>
+
+         <!-- Основной интерфейс -->
+         <div id="app-container">
+             <!-- Шапка -->
+             <header>
+                 <div class="header-content">
+                     <h1 data-translate="profile">Профиль</h1>
+                     <div class="profile-icon material-icons" role="button" aria-label="Перейти в профиль">person</div>
+                 </div>
+             </header>
+
+             <!-- Профиль -->
+             <section id="profile-section">
+                 <h2 data-translate="yourProfile">Ваш профиль</h2>
+                 <div class="profile-info">
+                     <img src="https://via.placeholder.com/100?text=User" alt="User Avatar" class="avatar">
+                     <p><strong data-translate="name">Имя:</strong> <span data-translate="user">Пользователь</span></p>
+                     <p><strong data-translate="email">Email:</strong> user@example.com</p>
+                     <p><strong data-translate="phone">Телефон:</strong> +998 90 123 45 67</p>
+                     <p><strong data-translate="orders">Заказы:</strong> 3</p>
+                     <p><strong data-translate="city">Город:</strong> <span data-translate="tashkent">Ташкент</span></p>
+                     <button class="book-now" data-translate="editProfile">Редактировать профиль</button>
+                     <div class="language-selector">
+                         <label for="language-select" data-translate="language">Язык:</label>
+                         <select id="language-select" onchange="changeLanguage(this.value)">
+                             <option value="ru">Русский</option>
+                             <option value="en">English</option>
+                             <option value="kk">Қазақша</option>
+                             <option value="tg">Тоҷикӣ</option>
+                             <option value="ky">Кыргызча</option>
+                             <option value="uz">O'zbekcha</option>
+                         </select>
+                     </div>
+                 </div>
+                 <h2 data-translate="orderHistory">История заказов</h2>
+                 <div class="order-history">
+                     <div class="order">
+                         <p><strong data-translate="orderService">Услуга:</strong> <span data-translate="hairColoring">Окрашивание волос</span></p>
+                         <p><strong data-translate="date">Дата:</strong> 2025-04-20</p>
+                         <p><strong data-translate="status">Статус:</strong> <span data-translate="completed">Завершено</span></p>
+                     </div>
+                     <div class="order">
+                         <p><strong data-translate="orderService">Услуга:</strong> <span data-translate="massage">Массаж</span></p>
+                         <p><strong data-translate="date">Дата:</strong> 2025-04-15</p>
+                         <p><strong data-translate="status">Статус:</strong> <span data-translate="completed">Завершено</span></p>
+                     </div>
+                 </div>
+             </section>
+
+             <!-- Навигационная панель -->
+             <nav class="bottom-nav" role="navigation" aria-label="Основная навигация">
+                 <div class="nav-item" data-page="home" role="button" aria-label="Главная страница">
+                     <span class="material-icons">home</span>
+                     <p data-translate="home">Главная</p>
+                 </div>
+                 <div class="nav-item" data-page="search" role="button" aria-label="Страница поиска">
+                     <span class="material-icons">search</span>
+                     <p data-translate="search">Поиск</p>
+                 </div>
+                 <div class="nav-item" data-page="map" role="button" aria-label="Страница карты">
+                     <span class="material-icons">map</span>
+                     <p data-translate="map">Карта</p>
+                 </div>
+                 <div class="nav-item active" data-page="profile" role="button" aria-label="Страница профиля">
+                     <span class="material-icons">person</span>
+                     <p data-translate="profile">Профиль</p>
+                 </div>
+             </nav>
+         </div>
+
+         <script src="translations.js"></script>
+         <script src="script.js"></script>
+     </body>
+     </html>
+

@@ -1,221 +1,438 @@
 body {
-         margin: 0;
-         font-family: 'Roboto', sans-serif;
-         background-color: #121212;
-         color: #FFFFFF;
-         overflow-x: hidden;
-     }
+       margin: 0;
+       font-family: 'Roboto', sans-serif;
+       background-color: #FFF5F7; /* Мягкий розовый фон */
+       color: #4A2C3C; /* Тёмно-розовый текст */
+       overflow-x: hidden;
+       -webkit-font-smoothing: antialiased;
+       -moz-osx-font-smoothing: grayscale;
+   }
 
-     /* Открывающая сцена */
-     #splash-screen {
-         position: fixed;
-         top: 0;
-         left: 0;
-         width: 100%;
-         height: 100%;
-         background-color: #121212;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         z-index: 1000;
-     }
+   /* Логотип */
+   .logo {
+       position: fixed;
+       top: 10px;
+       left: 50%;
+       transform: translateX(-50%);
+       z-index: 1001;
+       width: 100%; /* Занимает всю ширину для центрирования */
+       text-align: center; /* Центрируем содержимое */
+   }
 
-     .splash-content {
-         text-align: center;
-     }
+   .logo img {
+       width: 120px; /* Уменьшаем ширину, чтобы логотип стал меньше */
+       height: auto; /* Сохраняем пропорции, высота подстраивается автоматически */
+       max-width: 90%; /* Ограничиваем максимальную ширину */
+   }
 
-     .splash-content h1 {
-         font-size: 48px;
-         margin-bottom: 20px;
-     }
+   /* Загрузочный экран */
+   #loading-screen {
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       background-color: #FFF5F7;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       z-index: 1002;
+   }
 
-     .splash-content p {
-         font-size: 24px;
-     }
+   /* Открывающая сцена */
+   #splash-screen {
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       background-color: #FFF5F7;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       z-index: 1000;
+   }
 
-     .spinner {
-         margin-top: 20px;
-         width: 40px;
-         height: 40px;
-         border: 4px solid #00C4B4;
-         border-top: 4px solid transparent;
-         border-radius: 50%;
-         animation: spin 1s linear infinite;
-     }
+   .splash-content {
+       text-align: center;
+   }
 
-     @keyframes spin {
-         0% { transform: rotate(0deg); }
-         100% { transform: rotate(360deg); }
-     }
+   .opening-icon {
+       width: 100px;
+       height: auto; /* Сохраняем пропорции для логотипа на открывающей сцене */
+       margin-bottom: 20px;
+   }
 
-     .fade-in {
-         animation: fadeIn 2s ease-in forwards;
-     }
+   .matnar-group {
+       font-family: 'Playfair Display', serif;
+       font-size: 48px;
+       margin-bottom: 20px;
+       color: #FF6F9C;
+       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+   }
 
-     .fade-in-delayed {
-         animation: fadeIn 2s ease-in forwards;
-         animation-delay: 1s;
-         opacity: 0;
-     }
+   .powered-by {
+       font-family: 'Raleway', sans-serif;
+       font-size: 24px;
+       color: #D4A5A5;
+       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+   }
 
-     @keyframes fadeIn {
-         0% { opacity: 0; transform: translateY(20px); }
-         100% { opacity: 1; transform: translateY(0); }
-     }
+   .spinner {
+       margin-top: 20px;
+       width: 40px;
+       height: 40px;
+       border: 4px solid #FF6F9C;
+       border-top: 4px solid transparent;
+       border-radius: 50%;
+       animation: spin 1s linear infinite;
+   }
 
-     /* Основной интерфейс */
-     #app-container {
-         display: flex;
-         flex-direction: column;
-         height: 100vh;
-     }
+   @keyframes spin {
+       0% { transform: rotate(0deg); }
+       100% { transform: rotate(360deg); }
+   }
 
-     .hidden {
-         display: none;
-     }
+   .fade-in {
+       animation: fadeIn 2s ease-in-out forwards;
+   }
 
-     header {
-         background-color: #1E1E1E;
-         padding: 15px 20px;
-         display: flex;
-         justify-content: space-between;
-         align-items: center;
-         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-     }
+   .fade-in-delayed {
+       animation: fadeIn 2s ease-in-out forwards;
+       animation-delay: 1s;
+       opacity: 0;
+   }
 
-     .header-content h1 {
-         font-size: 24px;
-         margin: 0;
-     }
+   @keyframes fadeIn {
+       0% { opacity: 0; transform: translateY(20px); }
+       100% { opacity: 1; transform: translateY(0); }
+   }
 
-     .profile-icon {
-         font-size: 24px;
-         cursor: pointer;
-         transition: color 0.3s ease;
-     }
+   /* Основной интерфейс */
+   #app-container {
+       display: flex;
+       flex-direction: column;
+       height: 100vh;
+       padding-top: 60px; /* Уменьшаем отступ, так как логотип стал меньше */
+   }
 
-     .profile-icon:hover {
-         color: #00C4B4;
-     }
+   .hidden {
+       display: none;
+   }
 
-     #map-container {
-         flex: 1;
-         position: relative;
-         height: 200px;
-         margin: 10px 0;
-     }
+   header {
+       background-color: #FEE1E8;
+       padding: 15px 20px;
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+       animation: slideDown 0.5s ease-in-out forwards;
+   }
 
-     #map {
-         width: 100%;
-         height: 100%;
-         border-radius: 10px;
-         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-     }
+   @keyframes slideDown {
+       0% { opacity: 0; transform: translateY(-20px); }
+       100% { opacity: 1; transform: translateY(0); }
+   }
 
-     #services {
-         padding: 20px;
-         padding-bottom: 70px; /* Учитываем высоту навигационной панели */
-     }
+   .header-content h1 {
+       font-size: 24px;
+       margin: 0;
+       color: #4A2C3C;
+   }
 
-     #services h2 {
-         font-size: 20px;
-         margin-bottom: 15px;
-         color: #00C4B4;
-     }
+   .profile-icon {
+       font-size: 24px;
+       cursor: pointer;
+       transition: color 0.3s ease, transform 0.3s ease;
+       color: #FF6F9C;
+   }
 
-     .service-cards {
-         display: flex;
-         overflow-x: auto;
-         gap: 15px;
-     }
+   .profile-icon:hover, .profile-icon:focus {
+       color: #D4A5A5;
+       transform: scale(1.1);
+       outline: none;
+   }
 
-     .card {
-         background-color: #1E1E1E;
-         border-radius: 10px;
-         padding: 15px;
-         min-width: 150px;
-         text-align: center;
-         transition: transform 0.3s ease, box-shadow 0.3s ease;
-     }
+   #map-container {
+       flex: 1;
+       position: relative;
+       height: 200px;
+       margin: 10px 0;
+   }
 
-     .card:hover {
-         transform: scale(1.05);
-         box-shadow: 0 4px 10px rgba(0, 196, 180, 0.3);
-     }
+   #city-selector {
+       position: absolute;
+       top: 10px;
+       left: 10px;
+       z-index: 1000;
+       display: flex;
+       gap: 10px;
+   }
 
-     .card img {
-         width: 100%;
-         height: 100px;
-         object-fit: cover;
-         border-radius: 5px;
-         margin-bottom: 10px;
-     }
+   #city-select, #service-filter, #category-filter, #city-filter {
+       padding: 8px;
+       border-radius: 5px;
+       background-color: #FEE1E8;
+       color: #4A2C3C;
+       border: 1px solid #FF6F9C;
+       transition: background-color 0.3s ease;
+   }
 
-     .card h3 {
-         font-size: 16px;
-         margin: 5px 0;
-     }
+   #city-select:hover, #service-filter:hover,
+   #city-select:focus, #service-filter:focus,
+   #category-filter:hover, #city-filter:hover,
+   #category-filter:focus, #city-filter:focus {
+       background-color: #FFD1DC;
+       outline: none;
+   }
 
-     .card p {
-         font-size: 14px;
-         color: #B0B0B0;
-         margin-bottom: 10px;
-     }
+   #map {
+       width: 100%;
+       height: 100%;
+       border-radius: 10px;
+       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+   }
 
-     .book-now {
-         background-color: #00C4B4;
-         color: #FFFFFF;
-         border: none;
-         padding: 8px 15px;
-         border-radius: 5px;
-         cursor: pointer;
-         transition: background-color 0.3s ease;
-     }
+   #services, #search-section, #profile-section {
+       padding: 20px;
+       padding-bottom: 70px;
+   }
 
-     .book-now:hover {
-         background-color: #FF6F61;
-     }
+   #services h2, #search-section h2, #profile-section h2 {
+       font-size: 20px;
+       margin-bottom: 15px;
+       color: #FF6F9C;
+       animation: fadeIn 1s ease-in-out forwards;
+   }
 
-     .slide-in {
-         animation: slideIn 0.5s ease-out forwards;
-     }
+   #search-input {
+       width: 100%;
+       padding: 10px;
+       border-radius: 5px;
+       border: none;
+       background-color: #FEE1E8;
+       color: #4A2C3C;
+       margin-bottom: 15px;
+       transition: background-color 0.3s ease;
+   }
 
-     @keyframes slideIn {
-         0% { opacity: 0; transform: translateX(20px); }
-         100% { opacity: 1; transform: translateX(0); }
-     }
+   #search-input:focus {
+       background-color: #FFD1DC;
+       outline: none;
+       border: 1px solid #FF6F9C;
+   }
 
-     .bottom-nav {
-         display: flex;
-         justify-content: space-around;
-         background-color: #1E1E1E;
-         padding: 10px 0;
-         position: fixed;
-         bottom: 0;
-         width: 100%;
-         box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
-     }
+   #filters {
+       display: flex;
+       gap: 10px;
+       margin-bottom: 15px;
+   }
 
-     .nav-item {
-         display: flex;
-         flex-direction: column;
-         align-items: center;
-         color: #B0B0B0;
-         font-size: 12px;
-         cursor: pointer;
-         transition: color 0.3s ease;
-     }
+   #search-results, .profile-info {
+       background-color: #FEE1E8;
+       padding: 15px;
+       border-radius: 10px;
+       animation: slideUp 0.5s ease-in-out forwards;
+   }
 
-     .nav-item.active {
-         color: #00C4B4;
-     }
+   @keyframes slideUp {
+       0% { opacity: 0; transform: translateY(20px); }
+       100% { opacity: 1; transform: translateY(0); }
+   }
 
-     .nav-item:hover {
-         color: #00C4B4;
-     }
+   .profile-info {
+       text-align: center;
+   }
 
-     .nav-item .material-icons {
-         font-size: 24px;
-         margin-bottom: 5px;
-     }
+   .avatar {
+       width: 100px;
+       height: 100px;
+       border-radius: 50%;
+       margin-bottom: 15px;
+       animation: fadeIn 1s ease-in-out forwards;
+   }
+
+   .profile-info p {
+       margin: 5px 0;
+       transition: color 0.3s ease;
+   }
+
+   .profile-info p:hover {
+       color: #FF6F9C;
+   }
+
+   .order-history {
+       margin-top: 20px;
+   }
+
+   .order {
+       background-color: #FFD1DC;
+       padding: 10px;
+       border-radius: 5px;
+       margin-bottom: 10px;
+       animation: slideIn 0.5s ease-in-out forwards;
+   }
+
+   .language-selector {
+       margin-top: 20px;
+       display: flex;
+       gap: 10px;
+       align-items: center;
+       justify-content: center;
+   }
+
+   .language-selector label {
+       font-size: 16px;
+       color: #4A2C3C;
+   }
+
+   .language-selector select {
+       padding: 8px;
+       border-radius: 5px;
+       background-color: #FEE1E8;
+       color: #4A2C3C;
+       border: 1px solid #FF6F9C;
+       transition: background-color 0.3s ease;
+   }
+
+   .language-selector select:hover,
+   .language-selector select:focus {
+       background-color: #FFD1DC;
+       outline: none;
+   }
+
+   .service-grid {
+       display: grid;
+       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+       gap: 15px;
+   }
+
+   .card {
+       background-color: #FEE1E8;
+       border-radius: 10px;
+       padding: 15px;
+       text-align: center;
+       transition: transform 0.3s ease, box-shadow 0.3s ease;
+   }
+
+   .card:hover, .card:focus {
+       transform: scale(1.05);
+      bildungbox-shadow: 0 4px 10px rgba(255, 111, 156, 0.3);
+       outline: none;
+   }
+
+   .card img {
+       width: 100%;
+       height: 100px;
+       object-fit: cover;
+       border-radius: 5px;
+       margin-bottom: 10px;
+       animation: fadeIn 1s ease-in-out forwards;
+   }
+
+   .card h3 {
+       font-size: 16px;
+       margin: 5px 0;
+       color: #4A2C3C;
+   }
+
+   .card p {
+       font-size: 14px;
+       color: #6B4E5A;
+       margin-bottom: 10px;
+   }
+
+   .book-now {
+       background-color: #FF6F9C;
+       color: #FFFFFF;
+       border: none;
+       padding: 8px 15px;
+       border-radius: 5px;
+       cursor: pointer;
+       transition: background-color 0.3s ease, transform 0.3s ease;
+   }
+
+   .book-now:hover, .book-now:focus {
+       background-color: #D4A5A5;
+       transform: scale(1.05);
+       outline: none;
+   }
+
+   .slide-in {
+       animation: slideIn 0.5s ease-in-out forwards;
+   }
+
+   @keyframes slideIn {
+       0% { opacity: 0; transform: translateY(20px); }
+       100% { opacity: 1; transform: translateY(0); }
+   }
+
+   .bottom-nav {
+       display: flex;
+       justify-content: space-around;
+       background-color: #FEE1E8;
+       padding: 10px 0;
+       position: fixed;
+       bottom: 0;
+       width: 100%;
+       box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+       animation: slideUp 0.5s ease-in-out forwards;
+   }
+
+   .nav-item {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       color: #6B4E5A;
+       font-size: 12px;
+       cursor: pointer;
+       transition: color 0.3s ease, transform 0.3s ease;
+   }
+
+   .nav-item.active {
+       color: #FF6F9C;
+   }
+
+   .nav-item:hover, .nav-item:focus {
+       color: #FF6F9C;
+       transform: scale(1.05);
+       outline: none;
+   }
+
+   .nav-item .material-icons {
+       font-size: 24px;
+       margin-bottom: 5px;
+   }
+
+   /* Медиа-запросы для адаптивности */
+   @media (max-width: 600px) {
+       .logo img {
+           width: 100px; /* Уменьшаем ширину для мобильных устройств */
+       }
+
+       #app-container {
+           padding-top: 50px; /* Уменьшаем отступ для мобильных */
+       }
+
+       #map-container {
+           height: 150px;
+       }
+
+       .card {
+           min-width: 120px;
+       }
+
+       .header-content h1 {
+           font-size: 20px;
+       }
+
+       .matnar-group {
+           font-size: 36px;
+       }
+
+       .powered-by {
+           font-size: 18px;
+       }
+   }
 

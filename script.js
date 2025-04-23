@@ -1,144 +1,110 @@
-// Инициализация карты
-     function initMap() {
-         const map = new google.maps.Map(document.getElementById("map"), {
-             center: { lat: 41.2995, lng: 69.2401 }, // Координаты Ташкента
-             zoom: 12,
-             styles: [
-                 { elementType: "geometry", stylers: [{ color: "#212121" }] },
-                 { elementType: "labels.text.stroke", stylers: [{ color: "#212121" }] },
-                 { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-                 {
-                     featureType: "administrative.locality",
-                     elementType: "labels.text.fill",
-                     stylers: [{ color: "#d59563" }],
-                 },
-                 {
-                     featureType: "poi",
-                     elementType: "labels.text.fill",
-                     stylers: [{ color: "#d59563" }],
-                 },
-                 {
-                     featureType: "poi.park",
-                     elementType: "geometry",
-                     stylers: [{ color: "#263c3f" }],
-                 },
-                 {
-                     featureType: "poi.park",
-                     elementType: "labels.text.fill",
-                     stylers: [{ color: "#6b9a76" }],
-                 },
-                 {
-                     featureType: "road",
-                     elementType: "geometry",
-                     stylers: [{ color: "#38414e" }],
-                 },
-                 {
-                     featureType: "road",
-                     elementType: "geometry.stroke",
-                     stylers: [{ color: "#212a37" }],
-                 },
-                 {
-                     featureType: "road",
-                     elementType: "labels.text.fill",
-                     stylers: [{ color: "#9ca5b3" }],
-                 },
-                 {
-                     featureType: "road.highway",
-                     elementType: "geometry",
-                     stylers: [{ color: "#746855" }],
-                 },
-                 {
-                     featureType: "road.highway",
-                     elementType: "geometry.stroke",
-                     stylers: [{ color: "#1f2835" }],
-                 },
-                 {
-                     featureType: "road.highway",
-                     elementType: "labels.text.fill",
-                     stylers: [{ color: "#f3d19c" }],
-                 },
-                 {
-                     featureType: "transit",
-                     elementType: "geometry",
-                     stylers: [{ color: "#2f3948" }],
-                 },
-                 {
-                     featureType: "transit.station",
-                     elementType: "labels.text.fill",
-                     stylers: [{ color: "#d59563" }],
-                 },
-                 {
-                     featureType: "water",
-                     elementType: "geometry",
-                     stylers: [{ color: "#17263c" }],
-                 },
-                 {
-                     featureType: "water",
-                     elementType: "labels.text.fill",
-                     stylers: [{ color: "#515c6d" }],
-                 },
-                 {
-                     featureType: "water",
-                     elementType: "labels.text.stroke",
-                     stylers: [{ color: "#17263c" }],
-                 },
-             ],
-         });
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
 
-         // Местоположения в Ташкенте
-         const locations = [
-             { name: "Салон красоты", lat: 41.3111, lng: 69.2797 },
-             { name: "Мастерская ремонта", lat: 41.2995, lng: 69.2401 },
-             { name: "Спа-центр", lat: 41.3275, lng: 69.2813 },
-         ];
+const translations = {
+    ru: {
+        tashkent: "Ташкент",
+        hours: "Часы работы",
+        services: "Услуги",
+        prices: "Цены",
+        category: "Категория",
+        filterByCategory: "Фильтр по категории",
+        all: "Все",
+        welcome: "Добро пожаловать в Shemmer Bot",
+        selectLanguage: "Выберите язык"
+    },
+    en: {
+        tashkent: "Tashkent",
+        hours: "Hours",
+        services: "Services",
+        prices: "Prices",
+        category: "Category",
+        filterByCategory: "Filter by Category",
+        all: "All",
+        welcome: "Welcome to Shemmer Bot",
+        selectLanguage: "Select Language"
+    }
+};
 
-         locations.forEach(location => {
-             new google.maps.Marker({
-                 position: { lat: location.lat, lng: location.lng },
-                 map: map,
-                 title: location.name,
-                 icon: {
-                     url: "https://maps.google.com/mapfiles/ms/icons/green-dot.png"
-                 }
-             });
-         });
-     }
+let currentLang = 'ru'; // Язык по умолчанию
 
-     // Показать основной интерфейс после открывающей сцены
-     window.onload = function() {
-         setTimeout(() => {
-             document.getElementById("splash-screen").style.display = "none";
-             document.getElementById("app-container").classList.remove("hidden");
-         }, 3000);
-     };
+const server = http.createServer((req, res) => {
+    if (req.url.startsWith('/lang/')) {
+        currentLang = req.url.split('/')[2] || 'ru';
+        res.writeHead(302, { 'Location': '/' });
+        res.end();
+    } else if (req.url === '/') {
+        try {
+            const places = JSON.parse(fs.readFileSync(path.join(__dirname, 'places.json'), 'utf8'));
+            const categories = [...new Set(places.tashkent.map(place => place.category))];
+            res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+            res.end(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Shemmer Bot</title>
+                    <link rel="stylesheet" href="/style.css">
+                </head>
+                <body>
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <label for="lang">${translations[currentLang].selectLanguage}: </label>
+                        <select id="lang" onchange="window.location.href='/lang/' + this.value">
+                            <option value="ru" ${currentLang === 'ru' ? 'selected' : ''}>Русский</option>
+                            <option value="en" ${currentLang === 'en' ? 'selected' : ''}>English</option>
+                        </select>
+                    </div>
+                    <h1>${translations[currentLang].welcome}</h1>
+                    <h2>${translations[currentLang].tashkent}</h2>
+                    <div class="filter">
+                        <label for="category">${translations[currentLang].filterByCategory}: </label>
+                        <select id="category" onchange="filterPlaces()">
+                            <option value="all">${translations[currentLang].all}</option>
+                            ${categories.map(category => `<option value="${category}">${category}</option>`).join('')}
+                        </select>
+                    </div>
+                    <ul id="places-list">
+                        ${places.tashkent.map((place, index) => `
+                            <li data-category="${place.category}" data-index="${index}">
+                                <div class="place-name">${place.name}</div>
+                                ${translations[currentLang].hours}: ${place.hours}<br>
+                                ${translations[currentLang].services}: ${place.services.join(', ')}<br>
+                                ${translations[currentLang].prices}: ${place.prices.join(', ')}<br>
+                                ${translations[currentLang].category}: ${place.category}
+                            </li>
+                        `).join('')}
+                    </ul>
+                    <script>
+                        function filterPlaces() {
+                            const category = document.getElementById('category').value;
+                            const places = document.querySelectorAll('#places-list li');
+                            places.forEach(place => {
+                                if (category === 'all' || place.getAttribute('data-category') === category) {
+                                    place.style.display = 'block';
+                                } else {
+                                    place.style.display = 'none';
+                                }
+                            });
+                        }
+                    </script>
+                </body>
+                </html>
+            `);
+        } catch (error) {
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end(`Error: ${error.message}`);
+        }
+    } else if (req.url === '/style.css') {
+        const css = fs.readFileSync(path.join(__dirname, 'style.css'), 'utf8');
+        res.writeHead(200, { 'Content-Type': 'text/css' });
+        res.end(css);
+    } else {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('Not Found');
+    }
+});
 
-     // Анимация карточек при прокрутке
-     const cards = document.querySelectorAll(".card");
-     const observer = new IntersectionObserver((entries) => {
-         entries.forEach(entry => {
-             if (entry.isIntersecting) {
-                 entry.target.classList.add("slide-in");
-             }
-         });
-     }, { threshold: 0.1 });
-
-     cards.forEach(card => observer.observe(card));
-
-     // Навигация по вкладкам
-     const navItems = document.querySelectorAll(".nav-item");
-     navItems.forEach(item => {
-         item.addEventListener("click", () => {
-             navItems.forEach(i => i.classList.remove("active"));
-             item.classList.add("active");
-             const page = item.getAttribute("data-page");
-             alert(`Переход на страницу: ${page}`); // Здесь можно добавить логику перехода на страницу
-         });
-     });
-
-     // Поддержка PWA
-     if ('serviceWorker' in navigator) {
-         navigator.serviceWorker.register('/service-worker.js')
-             .then(reg => console.log('Service Worker registered', reg))
-             .catch(err => console.log('Service Worker registration failed', err));
-     }
+server.listen(3000, () => {
+    console.log('Server running at http://localhost:3000/');
+});
 

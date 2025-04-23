@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f9;
+    color: #333;
+}
+h1, h2 {
+    text-align: center;
+    color: #2c3e50;
+}
+.filter {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.filter select {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+li {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+li:hover {
+    transform: translateY(-3px);
+}
+.place-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2980b9;
+}
+

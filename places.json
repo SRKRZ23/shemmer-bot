@@ -1,0 +1,464 @@
+{
+    "tashkent": [
+        {
+            "name": "manorSpaTashkent",
+            "lat": 41.2965715,
+            "lng": 69.2818276,
+            "hours": "Monday: 11:00 AM – 11:00 PM",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "spaSalonSheikh",
+            "lat": 41.3274578,
+            "lng": 69.2875428,
+            "hours": "Monday: Open 24 hours",
+            "services": ["spaProcedures", "massage", "sauna"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "mdMassageSpaCenter",
+            "lat": 41.274916,
+            "lng": 69.30975889999999,
+            "hours": "Monday: 9:00 AM – 1:00 AM",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "spaLife",
+            "lat": 41.2918555,
+            "lng": 69.28295820000001,
+            "hours": "Monday: Open 24 hours",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "oceanSpa",
+            "lat": 41.2867324,
+            "lng": 69.2630204,
+            "hours": "Monday: 10:00 AM – 11:00 PM",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "sevenDaysWellness",
+            "lat": 41.3168558,
+            "lng": 69.29994429999999,
+            "hours": "Monday: 12:00 – 6:00 AM, 12:00 PM – 12:00 AM",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "pureEsthetic",
+            "lat": 41.2985596,
+            "lng": 69.2599984,
+            "hours": "Monday: 10:00 AM – 11:00 PM",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "lotusTashkent",
+            "lat": 41.3036278,
+            "lng": 69.2893507,
+            "hours": "Monday: 11:00 AM – 4:00 AM",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "wellnessComplexShans",
+            "lat": 41.2964397,
+            "lng": 69.2557765,
+            "hours": "Monday: 10:00 AM – 1:00 AM",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "magicSpaTashkent",
+            "lat": 41.2712867,
+            "lng": 69.17560879999999,
+            "hours": "Monday: 10:00 AM – 10:00 PM",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "spaSalonTonus",
+            "lat": 41.2874165,
+            "lng": 69.2728912,
+            "hours": "Monday: 11:00 AM – 2:00 AM",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "spaTsentrImperiyaPara",
+            "lat": 41.3718314,
+            "lng": 69.293685,
+            "hours": "Monday: 11:00 AM – 12:00 AM",
+            "services": ["spaProcedures"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "soteBeautySpa",
+            "lat": 41.3145631,
+            "lng": 69.241164,
+            "hours": "Monday: 9:00 AM – 8:00 PM",
+            "services": ["spaProcedures"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "zenStudioTashkent",
+            "lat": 41.2880732,
+            "lng": 69.2571244,
+            "hours": "Monday: 9:00 AM – 8:00 PM",
+            "services": ["spaProcedures"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "lotusKarasaray",
+            "lat": 41.3669257,
+            "lng": 69.2407364,
+            "hours": "Monday: 11:00 AM – 4:00 AM",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "sergeliSpaSalon",
+            "lat": 41.2117171,
+            "lng": 69.22146579999999,
+            "hours": "Monday: Open 24 hours",
+            "services": ["spaProcedures"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "equilibriumWellnessClub",
+            "lat": 41.3151981,
+            "lng": 69.2822963,
+            "hours": "Monday: 7:00 AM – 11:00 PM",
+            "services": ["spaProcedures"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "wellnessHouse",
+            "lat": 41.272029,
+            "lng": 69.264706,
+            "hours": "Monday: 11:00 AM – 12:00 AM",
+            "services": ["spaProcedures"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "spaSalonOrhideya",
+            "lat": 41.2875986,
+            "lng": 69.25740979999999,
+            "hours": "Monday: Open 24 hours",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "diamondSpaNovza",
+            "lat": 41.2934256,
+            "lng": 69.2259688,
+            "hours": "Monday: Open 24 hours",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "spa"
+        },
+        {
+            "name": "lakeSpa",
+            "lat": 41.2972798,
+            "lng": 69.2559747,
+            "hours": "Monday: Open 24 hours",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "massage"
+        },
+        {
+            "name": "dinaSpa",
+            "lat": 41.3757715,
+            "lng": 69.2773702,
+            "hours": "Monday: Open 24 hours",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "massage"
+        },
+        {
+            "name": "secretSpaSalon",
+            "lat": 41.327544,
+            "lng": 69.2875971,
+            "hours": "Monday: Open 24 hours",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "massage"
+        },
+        {
+            "name": "sevenDaysSpa",
+            "lat": 41.2894031,
+            "lng": 69.201996,
+            "hours": "Monday: Open 24 hours",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "massage"
+        },
+        {
+            "name": "diamondSpaTashkent",
+            "lat": 41.2920446,
+            "lng": 69.27394439999999,
+            "hours": "Monday: Open 24 hours",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "massage"
+        },
+        {
+            "name": "spaSalonLotusSauna",
+            "lat": 41.31546640000001,
+            "lng": 69.3245419,
+            "hours": "Monday: 11:00 AM – 4:00 AM",
+            "services": ["spaProcedures", "massage", "sauna"],
+            "prices": ["Неизвестно"],
+            "category": "massage"
+        },
+        {
+            "name": "serenitySpa",
+            "lat": 41.3137784,
+            "lng": 69.2491064,
+            "hours": "Monday: 6:30 AM – 11:00 PM",
+            "services": ["spaProcedures", "massage"],
+            "prices": ["Неизвестно"],
+            "category": "massage"
+        },
+        {
+            "name": "yogaSpace",
+            "lat": 41.2852428,
+            "lng": 69.2649148,
+            "hours": "Monday: 6:30 AM – 9:30 PM",
+            "services": ["yoga"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "wellme",
+            "lat": 41.297292,
+            "lng": 69.2788424,
+            "hours": "Monday: 7:00 AM – 9:00 PM",
+            "services": ["yoga"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "artha",
+            "lat": 41.2791734,
+            "lng": 69.2491033,
+            "hours": "Monday: 10:00 AM – 10:00 PM",
+            "services": ["yoga"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "jieYogaSpace",
+            "lat": 41.2994958,
+            "lng": 69.2400734,
+            "hours": "Monday: 7:30 AM – 10:00 PM",
+            "services": ["yoga"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "nangoorYogaAyurveda",
+            "lat": 41.3256193,
+            "lng": 69.33553479999999,
+            "hours": "Monday: Open 24 hours",
+            "services": ["yoga"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "blessedStudio",
+            "lat": 41.2839566,
+            "lng": 69.2670498,
+            "hours": "Monday: 10:00 AM – 9:00 PM",
+            "services": ["yoga"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "thaiYogaMassage",
+            "lat": 41.3173796,
+            "lng": 69.2432412,
+            "hours": "Monday: Open 24 hours",
+            "services": ["yoga"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "alinasYoga",
+            "lat": 41.3000275,
+            "lng": 69.272714,
+            "hours": "Monday: 5:30 – 7:00 PM",
+            "services": ["yoga"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "ozonefcDarhan",
+            "lat": 41.3200651,
+            "lng": 69.3008846,
+            "hours": "Monday: 6:00 AM – 11:00 PM",
+            "services": ["spaProcedures"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "yogaFederationUzbekistan",
+            "lat": 41.3164604,
+            "lng": 69.2912173,
+            "hours": "Monday: 9:00 AM – 6:00 PM",
+            "services": ["yoga"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "tulasiLife",
+            "lat": 41.2994958,
+            "lng": 69.2400734,
+            "hours": "Monday: 9:00 AM – 8:00 PM",
+            "services": ["yoga"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "victoryFitnessClub",
+            "lat": 41.3568908,
+            "lng": 69.2367969,
+            "hours": "Monday: 9:00 AM – 10:00 PM",
+            "services": ["yoga"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "turonLibraryCenter",
+            "lat": 41.3303568,
+            "lng": 69.24351,
+            "hours": "Monday: 9:00 AM – 9:00 PM",
+            "services": ["yoga"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "superbody",
+            "lat": 41.3675263,
+            "lng": 69.2936364,
+            "hours": "Monday: 8:00 AM – 10:00 PM",
+            "services": ["yoga"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "reformaFitnes",
+            "lat": 41.32049689999999,
+            "lng": 69.28724720000001,
+            "hours": "Monday: 9:00 AM – 9:00 PM",
+            "services": ["yoga"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "magicGalaxyWellness",
+            "lat": 41.271171,
+            "lng": 69.1754085,
+            "hours": "Monday: 6:00 AM – 11:00 PM",
+            "services": ["spaProcedures"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "yogaTsentr",
+            "lat": 41.3192287,
+            "lng": 69.3008189,
+            "hours": "Неизвестно",
+            "services": ["yoga"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "bukagymTrainingCenter",
+            "lat": 41.271201,
+            "lng": 69.26196449999999,
+            "hours": "Monday: 7:00 AM – 11:00 PM",
+            "services": ["yoga"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "ecoCafeVegan",
+            "lat": 41.3181332,
+            "lng": 69.3169728,
+            "hours": "Monday: 9:00 AM – 10:00 PM",
+            "services": ["yoga"],
+            "prices": ["Неизвестно"],
+            "category": "yoga"
+        },
+        {
+            "name": "zizaBeautyStudio",
+            "lat": 41.3117686,
+            "lng": 69.272947,
+            "hours": "Monday: 9:00 AM – 8:00 PM",
+            "services": ["hairColoring", "manicure", "pedicure", "makeup"],
+            "prices": ["Неизвестно"],
+            "category": "beauty"
+        },
+        {
+            "name": "beautyMe",
+            "lat": 41.3405169,
+            "lng": 69.2702542,
+            "hours": "Monday: 9:00 AM – 7:00 PM",
+            "services": ["hairColoring", "manicure", "pedicure", "makeup"],
+            "prices": ["Неизвестно"],
+            "category": "beauty"
+        },
+        {
+            "name": "forMeBeautySpace",
+            "lat": 41.3140293,
+            "lng": 69.29359130000002,
+            "hours": "Monday: 9:00 AM – 9:00 PM",
+            "services": ["hairColoring", "manicure", "pedicure", "makeup"],
+            "prices": ["Неизвестно"],
+            "category": "beauty"
+        },
+        {
+            "name": "beautyHouseTashkent",
+            "lat": 41.2943091,
+            "lng": 69.2129965,
+            "hours": "Monday: 9:00 AM – 8:00 PM",
+            "services": ["hairColoring", "manicure", "pedicure", "makeup"],
+            "prices": ["Неизвестно"],
+            "category": "beauty"
+        },
+        {
+            "name": "lazernayaEpilyaciyaTashkenteHairboss",
+            "lat": 41.2954183,
+            "lng": 69.2797914,
+            "hours": "Open now",
+            "services": ["hairColoring", "manicure", "makeup"],
+            "prices": ["Неизвестно"],
+            "category": "beauty"
+        }
+    ]
+}
+
